@@ -1,0 +1,91 @@
+server:
+  host-address-authentication: http://94.232.173.157:8000
+  servlet:
+    session:
+      timeout: 600000
+      cookie:
+        name: UISESSION
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,application/javascript,application/json
+    min-response-size: 1024
+spring:
+  application:
+    name: UAA
+  boot:
+    admin:
+      client:
+        url:
+        - http://administrator:8080
+  data:
+    mongodb:
+      uri: mongodb://mongo-router-uaa/UAA
+  rabbitmq:
+    host: 192.168.4.101
+    port: 5672
+    username: guest
+    password: guest
+eureka:
+  client:
+    service-url:
+      defaultZone: http://registry:8080/eureka
+    enabled: true
+    healthcheck:
+      enabled: true
+    fetch-registry: true
+    register-with-eureka: true
+    instance-info-replication-interval-seconds: 10
+    registry-fetch-interval-seconds: 10
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+    metadata-map:
+      zone: primary # This is needed for the load balancer
+ribbon:
+  ReadTimeout: 100000000
+  eureka:
+    enabled: true
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 60000000
+        readTimeout: 60000000
+hystrix:
+  metrics:
+    enabled: true
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 50000000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+logging:
+  path: log
+  file: 
+    max-size: 5MB
+    max-history: 100
+jwt:
+  token:
+    access-token-validity-seconds: 720
+    support-refresh-token: true
+    header-name: Authorization
+    header-name-uaa: AuthorizationUAA
+    header-name-sub-uaa: AuthorizationSubUAA
+project:
+  key: SAMA_LIVE_PROJECT
+security:
+  oauth2:
+    client:
+      client-id: UAAId
+      client-secret: UAASecret
