@@ -94,8 +94,8 @@ project:
 security:
   oauth2:
     client:
-      client-id: GatewayMainId
-      client-secret: GatewayMainSecret
+      client-id: GatewayClassId
+      client-secret: GatewayClassSecret
 ##### clientId + ":" + clientSecret
       client-id-and-secret-in-base-64: R2F0ZXdheUNsYXNzSWQ6R2F0ZXdheUNsYXNzU2VjcmV0
       grant-type: password
